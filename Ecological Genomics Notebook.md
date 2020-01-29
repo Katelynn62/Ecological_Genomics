@@ -229,6 +229,26 @@ Bash scripting
 6. Because our file is not rwxr--r--...(*rwr--r--r*)
 1. chmod is a command to change permissions: u+x adds permissions to all users
 7. Sync repo with github and then with your local machine - pull github repo...double click html to open the files. Can't open in bash.
+
+#### Trimmomatic
+1. Example script is located in cd /data/scripts
+
+We want paired reads here...unpaired reads are lower quality data. 
+* To do this, we need to create an R2 name based on the R1 name becuase the are identical...
+1. BRB_01_R1_fastqc.gz
+2. BRB_01_R2_fastqc.gz
+* So we are saying that R1 variable is equal to the R2 variable... *got confused here*
+* threads is a CPU in your computer. 
+* *phred33* is a phred score..
+* Reads are going to be put into the common space..Unpaired and paired reads to separate them. It will name each of the files based on the named variable...BRB_05_R1.cl.pd.fq ,etc.
+
+cleaned paired reads are in *cd data/project_data/RS_ExomeSeq/fastq?edge_fastq/pairedcleanreads/*
+* You should have probably 8 files in there. 
+
+
+
+
+
 ------
 <div id='id-section14'/>   
 
