@@ -184,10 +184,6 @@
 
 ### Entry 12: 2020-01-28, Tuesday.   
 
-*Gafs
-
-*GFddf
-
 
 
 ------
@@ -195,8 +191,44 @@
 
 ### Entry 13: 2020-01-29, Wednesday.   
 
+* sample size = 110 mother trees from 23 populations
+* 80,000 120bp probes -> uniquely hybridized to a specific area
+* paired ends: 150 on each side..., so if our strand is 400 bp, we are only missing 100 bp readings.
+* single end: Can get 150 bp on one end of a 5'-> 3' DNA 
+Pipeline: files will end in .fastq.gz - zip file. 
+1. first thing we will do is visualize these (Program FastQC)
+2. Clean raw data (Program: Tricommomatic)
+* Visualize post trimming step to make sure it did what you wanted it to do (FastQC)
+3. Map/Align those reads to the reference genome (Program bwa, input: *.fastq*, output: *.sam*(human readable file)
+4. Post processing (samtools, sambamba)
+5. Remove PCR duplicates
+6. Calculate stats
 
+Coding: 
+* Because files are in *.fastq.gz* and are zipped, we cannot use standard bash tools that we learned in last class. 
+1. R1 = forward read
+2. R2 = reverse read
+* zcat peaks into the gzipped file without actually unzipping it. 
+1. *be sure to name your heading number otherwise your computer will spit out the contents without stopping* EX: zcat ___ | head -n 4
+1. Within this, N refers to a base that did not get a good read.
+3. Phred scores - what is the probability that the machine read the base *incorrectly*?
+1. p=10^-38/10
+2. p=10^-3.8
+3. p=0.0038
 
+Running the FastQC Program
+##### I am working with the: _BRB_
+
+Bash scripting
+* start with 
+1. #!/bin/bash - tells your script that you are working in bash
+2. for file in /data/project_data/RS_ExomeSeq/fastq/edge_fastq/BRB*fastq.gz
+3. To exit edit mode in script, click escape
+4. *.sh* is a bash script
+5. can rename file by old file name to move to new file name
+6. Because our file is not rwxr--r--...(*rwr--r--r*)
+1. chmod is a command to change permissions: u+x adds permissions to all users
+7. Sync repo with github and then with your local machine - pull github repo...double click html to open the files. Can't open in bash.
 ------
 <div id='id-section14'/>   
 
