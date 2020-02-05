@@ -345,7 +345,16 @@ commands
 
 ##### Reminders
 When you push data to github, you need to then pull on Bash using the git pull command, in order to pull your data/scripts/etc into Bash
+```
+screen
 
+bash mypipeline.sh
+
+Cntrl A + cntrl D
+
+screen -r # opens back up your mypipeline.sh
+
+```
 ------
 <div id='id-section19'/>   
 
