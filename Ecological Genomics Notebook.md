@@ -281,8 +281,70 @@ cleaned paired reads are in *cd data/project_data/RS_ExomeSeq/fastq?edge_fastq/p
 <div id='id-section18'/>   
 
 ### Entry 18: 2020-02-05, Wednesday.   
+Need to go through and fix the fastqc file.
+##### Objectives
+1. Review our progress on read cleaning and visualizing QC
+2. Start mapping each set of cleaned reads to a reference genome
+*  Made this script in R and transferred to Bash. 
+3. Visualize sequence alignment files
+4. Process our sam files by..
+* converting to binary format and sorting our coordinates
+* removing PCR duplicates
+* indexing for fast future lookup
+5. Calculate mapping stats to assess quality of the result
+6. Learn how to put separate bash scripts into a "wrapper" that runs them all
+* "The one script to rule them all" 
+
+###### Mapping Cleaned and trimmed reads..
+* Reference Genome..
+* congenie.org ; Good reference for conifers 
+* 12 Haploid chromosomes...24 total.
+* What is the N50; how much of the genome is assembled into large contigs(?)
+1. - - - -- -- -- --- --- --- **----** ------- -------- --------- ; sum = 668 Mb
+2. Take 50% ^ = 334 Mb; start with the biggest contig and move towards smaller until you have reached a sum of 334 Mb. 
+3. N50 is the smallest contig at which all of the sum of the larger to smaller contigs = 334 Mb. 
+4. N50 = 101,375 bp in this case. 
+5. N50 is usually a metric to understand the data you are looking at..
+* You usually decide to use this to compare individuals within species.
+* Generally speaking, bigger is better, because it gives you better spatial information
+##### Code for Today 
+1. We don't need to actually download the genome because it is already in a file in the directory...
+2. This is a code for us to get the genome.
+3. wget; handy tool for us to get info from the internet and download it.
+```
+cd /data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa
+```
+
+##### Code for the Wrapper script
+```
+# We will use this as a wrapper to run our different wrapping scripts
+#!/bin/cash # What every script in bash begins with. 
+
+```
+
+##### Mapping
+1. Using bwa...
+```
+bwa mem -t 1 -M ${ref}...
+```
+2. mem algorithm is fast and accurate for reads
+3. -t = how many threads? (CPUs) we are setting 1, but you can up it to your choice on your own
+4. -M; setting that labels a read with a special flag ; if when bwa maps it to the genome, it splits that read to more than one contig
+* This is possible because our DNA is very fragmented, so our reads could be on two contigs that are close together on the same chromosome.
+5. ${ref} = our reference genome
+6. ${forward} = our forward read
+7. ${reverse} = our  reverse read.
+
+##### Writing loops in bash
+for forward in [...] 
+*do*
+commands
+commands
+*done*
 
 
+##### Reminders
+When you push data to github, you need to then pull on Bash using the git pull command, in order to pull your data/scripts/etc into Bash
 
 ------
 <div id='id-section19'/>   
