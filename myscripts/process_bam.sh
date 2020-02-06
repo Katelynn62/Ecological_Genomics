@@ -12,8 +12,8 @@ for f in ${output}/BWA/${mypop}*.sam # this is going to work on any pop with .sa
 
 do 
   out=${f/.sam/}
-  sambamba-0.7.1-linux-static view -S --format=bam ${f} -o ${output}.bam
-  samtools sort ${output}.bam -o ${output}.sorted.bam
+  sambamba-0.7.1-linux-static view -S --format=bam ${f} -o ${out}.bam
+  samtools sort ${out}.bam -o ${output}.sorted.bam
 done
 
 #Now lets remove PCR duplicates from our bam files
