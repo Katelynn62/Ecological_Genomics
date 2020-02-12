@@ -398,6 +398,7 @@ screen -r # opens back up your mypipeline.sh
 * Analysis of next generation sequencing data
 
 
+
 ##### Code for today
 1. Look at a SAM file using 'head' and 'tail'
 ```
@@ -454,6 +455,44 @@ samtools tview /data/project_data/RS_ExomeSeq/mapping/BWA/BRB_01.sorted.rmdup.ba
 ![Visualize Sequences](‪C:\Users\kwarn\Pictures\Genomics_!.PNG)
 Genotype likelihood is the best way to handle these kinds of data.
 * Take the most probable.
+
+6. Running ANGSD
+1. Create list of bam files for samples you want to analyze
+2. Estimate genotype likelihooda and allele frequencies after filtering to minimize noise 
+3. Use GL's to:
+* a. Estimate the SFS
+* b. Estimate nucleotide diversities
+* c. estimate fst between all populations, or pairwise between sets of populations
+* d. perform a genetic PCA based on the estimation of genetic covariance matrix
+4. In myscripts, create ANGSD_mypop.sh
+```
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+# Estimating GL's and allele frequencies for all sites with ANGSD
+
+ANGSD -b ${output}/${mypop}_bam.list \
+-ref ${REF} -anc ${REF} \
+-out ${output}/${mypop}_allsites \
+-nThreads 1 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-setMinDepth 3 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doCounts 1 \
+-doMajorMinor 1 \
+-doMaf 1 \
+-doSaf 1 \
+-doHWE 1 \
+# -SNP_pval 1e-6
+```
+* if we wanted to just the polymorphic sites we would uncomment out the -SNP_pval call. 
 
 ##### Helpful bits of Code
 1. Reverse order of a list by the time the file was stamped
