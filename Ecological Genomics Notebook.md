@@ -388,7 +388,136 @@ screen -r # opens back up your mypipeline.sh
 
 ### Entry 23: 2020-02-12, Wednesday.   
 
+#### Population Genomics Day 3
+##### Class Objectives
+1. Review our progress on mapping
+2. Calculate mapping statistics to assess quality of the result
+3. Visusalize sequence alignment files
+4. Introduce use of genotype-likelihoods for analyzing diversity in low coverage sequences
+5. Use the 'ANGSD' program to calcullate diversity stats, Fsts, and PCA
+* Analysis of next generation sequencing data
 
+
+
+##### Code for today
+1. Look at a SAM file using 'head' and 'tail'
+```
+tail -n 100 BRB_04.sam 
+```
+A sam file is a tab delimited text file that stores information about the alignment of reads in a FASTQ file to reference genome or transcriptome. For each read in a FASTQ file, there's a line in the SAM file that includes;
+1. the read, aka query name,
+2. a FLAG (number with information about mapping success and orientation and whether the read is the left or right read)
+3. the reference sequence name to hwich the read mapped
+4. the leftmost position in the reference where the read mapped
+
+2. Flagstat gives us some basic stats on our sam files
+```
+samtools flagstat BRB_01.sam
+```
+* 2379308 + 0 in total (QC-passed reads + QC-failed reads) = number of reads
+134530 + 0 secondary = *number of reads that weren't duplicated?*
+0 + 0 supplementary
+0 + 0 duplicates
+2241464 + 0 mapped (94.21% : N/A)
+2244778 + 0 paired in sequencing
+1122389 + 0 read1
+1122389 + 0 read2
+1380290 + 0 properly paired (61.49% : N/A) ; *how many reads were properly paired together*
+2027840 + 0 with itself and mate mapped
+79094 + 0 singletons (3.52% : N/A) ; *how many were singletons...mapped with no other mate*
+633316 + 0 with mate mapped to a different chr
+318077 + 0 with mate mapped to a different chr (mapQ>=5)
+
+3. Write a loop to iterate through your individual files for the .bam files for flagstats
+```
+for file in ${output}/BWA/${mypop}*sorted.rmdup.bam
+  
+  do 
+    f=${file/.sorted.rmdup.bam/}
+    name=`basename ${f}`
+    echo ${name} >> ${myrepo}/myresults/${mypop}.names.txt
+    samtools flagstat ${file} | awk 'NR>=6&&NR<=12 {print $1}' | column -x
+  done >> ${myrepo}/myresults/${mypop}.flagstats.txt
+```
+4.Calculate depth of coverage from our bam files
+```
+for file in ${output}/BWA/${mypop}*sorted.rmdup.bam
+
+  do 
+    samtools depth ${file} | awk '{sum+=$3} END {print sum/NR}' 
+  done >> ${myrepo}/myresults/${mypop}.coverage.txt
+```
+5. Viewing your sequences
+```
+samtools tview /data/project_data/RS_ExomeSeq/mapping/BWA/BRB_01.sorted.rmdup.bam /data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa
+
+```
+![Visualize Sequences](‪C:\Users\kwarn\Pictures\Genomics_!.PNG)
+Genotype likelihood is the best way to handle these kinds of data.
+* Take the most probable.
+
+6. Running ANGSD
+1. Create list of bam files for samples you want to analyze
+2. Estimate genotype likelihooda and allele frequencies after filtering to minimize noise 
+3. Use GL's to:
+* a. Estimate the SFS
+* b. Estimate nucleotide diversities
+* c. estimate fst between all populations, or pairwise between sets of populations
+* d. perform a genetic PCA based on the estimation of genetic covariance matrix
+4. In myscripts, create ANGSD_mypop.sh
+```
+REF="/data/project_data/RS_ExomeSeq/ReferenceGenomes/Pabies1.0-genome_reduced.fa"
+
+# Estimating GL's and allele frequencies for all sites with ANGSD
+
+ANGSD -b ${output}/${mypop}_bam.list \
+-ref ${REF} -anc ${REF} \
+-out ${output}/${mypop}_allsites \
+-nThreads 1 \
+-remove_bads 1 \
+-C 50 \
+-baq 1 \
+-minMapQ 20 \
+-minQ 20 \
+-setMinDepth 3 \
+-minInd 2 \
+-setMinDepthInd 1 \
+-setMaxDepthInd 17 \
+-skipTriallelic 1 \
+-GL 1 \
+-doCounts 1 \
+-doMajorMinor 1 \
+-doMaf 1 \
+-doSaf 1 \
+-doHWE 1 \
+# -SNP_pval 1e-6
+```
+* if we wanted to just the polymorphic sites we would uncomment out the -SNP_pval call. 
+
+##### Helpful bits of Code
+1. Reverse order of a list by the time the file was stamped
+```
+ll -rt
+```
+2. look at specific files in a folder. This allows you to look at all BRB sam files.
+```
+ ll BRB*.sam
+```
+3. Look at first ten rows
+```
+head BRB_01.sam
+```
+* Each row of the head is the name of contig and its length in bp (LN)
+4. Look at the bottom ten rows
+```
+tail BRB_01.sam
+```
+* GWNJ-0842:368:GW1809211440:2:2224:19167:72983   163     MA_186154       822    40       13M1I41M3S      =       1191    469     AAGGAAANGGNGGNGGAATAGTGATGNGAAGTGTTAAGTATGGTCANGAACGGTACNA      AAFJJJJ#FJ#JJ#JJJJJJJJ<<FF#FFJJAJ-FJFFFFJJJJJJ#JJJFJJJJF#F      NM:i:9  MD:Z:7T2A8A5G0A5G11T0A8 AS:i:19 XS:i:0
+1. basically the ID of the read - GWNJ-0842:368:GW1809211440:2:2224:19167:72983
+2. 163 = flag ; can be interpretated by going to a flag decoder. The read was paired, mapped in a proper pair, mate reverse strand, second in pair.
+3. MA_186154; contig in P.abies that the read mapped to
+4. 822 ; left most position in the read
+5. 40; mapping quality in phred scale. Very unlikely that the read was mapped to the reference genome incorrectly.
 
 ------
 <div id='id-section24'/>   
@@ -423,6 +552,25 @@ screen -r # opens back up your mypipeline.sh
 
 ### Entry 28: 2020-02-19, Wednesday.   
 
+#### Population Genomics Day 3:
+
+##### Notes
+
+##### Code for today
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
 
 
 ------
