@@ -552,6 +552,25 @@ tail BRB_01.sam
 
 ### Entry 28: 2020-02-19, Wednesday.   
 
+#### Population Genomics Day 3:
+
+##### Notes
+
+##### Code for today
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
+
+```
+```
 
 
 ------
