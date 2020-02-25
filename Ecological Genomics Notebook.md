@@ -575,8 +575,6 @@ tail BRB_01.sam
 
 ```
 
-```
-
 ------
 <div id='id-section29'/>   
 ### Entry 29: 2020-02-20, Thursday.   
@@ -916,5 +914,3 @@ tail BRB_01.sam
 ------
 <div id='id-section85'/>   
 ### Entry 85: 2020-05-08, Friday.   
-
-```
