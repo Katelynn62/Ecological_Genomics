@@ -27,8 +27,6 @@
 * [Entry 11: 2020-01-27, Monday](#id-section11)
 * [Entry 12: 2020-01-28, Tuesday](#id-section12)
 * [Entry 13: 2020-01-29, Wednesday](#id-section13)
-
-
 * [Entry 14: 2020-01-30, Thursday](#id-section14)
 * [Entry 15: 2020-01-31, Friday](#id-section15)
 * [Entry 16: 2020-02-03, Monday](#id-section16)
@@ -168,18 +166,24 @@
 
 ------
 <div id='id-section11'/>   
+
+
 ### Entry 11: 2020-01-27, Monday.   
 
 
 
 ------
 <div id='id-section12'/>   
+
+
 ### Entry 12: 2020-01-28, Tuesday.   
 
 
 
 ------
 <div id='id-section13'/>   
+
+
 ### Entry 13: 2020-01-29, Wednesday.   
 
 * sample size = 110 mother trees from 23 populations
@@ -242,18 +246,24 @@ cleaned paired reads are in *cd data/project_data/RS_ExomeSeq/fastq?edge_fastq/p
 
 ------
 <div id='id-section14'/>   
+
+
 ### Entry 14: 2020-01-30, Thursday.   
 
 
 
 ------
 <div id='id-section15'/>   
+
+
 ### Entry 15: 2020-01-31, Friday.   
 
 
 
 ------
 <div id='id-section16'/>   
+
+
 ### Entry 16: 2020-02-03, Monday.   
 
 
@@ -266,6 +276,8 @@ cleaned paired reads are in *cd data/project_data/RS_ExomeSeq/fastq?edge_fastq/p
 
 ------
 <div id='id-section18'/>   
+
+
 ### Entry 18: 2020-02-05, Wednesday.   
 Need to go through and fix the fastqc file.
 ##### Objectives
@@ -343,30 +355,40 @@ screen -r # opens back up your mypipeline.sh
 ```
 ------
 <div id='id-section19'/>   
+
+
 ### Entry 19: 2020-02-06, Thursday.   
 
 
 
 ------
 <div id='id-section20'/>   
+
+
 ### Entry 20: 2020-02-07, Friday.   
 
 
 
 ------
 <div id='id-section21'/>   
+
+
 ### Entry 21: 2020-02-10, Monday.   
 
 
 
 ------
 <div id='id-section22'/>   
+
+
 ### Entry 22: 2020-02-11, Tuesday.   
 
 
 
 ------
 <div id='id-section23'/>   
+
+
 ### Entry 23: 2020-02-12, Wednesday.   
 
 #### Population Genomics Day 3
@@ -504,30 +526,40 @@ tail BRB_01.sam
 
 ------
 <div id='id-section24'/>   
+
+
 ### Entry 24: 2020-02-13, Thursday.   
 
 
 
 ------
 <div id='id-section25'/>   
+
+
 ### Entry 25: 2020-02-14, Friday.   
 
 
 
 ------
 <div id='id-section26'/>   
+
+
 ### Entry 26: 2020-02-17, Monday.   
 
 
 
 ------
 <div id='id-section27'/>   
+
+
 ### Entry 27: 2020-02-18, Tuesday.   
 
 
 
 ------
 <div id='id-section28'/>   
+
+
 ### Entry 28: 2020-02-19, Wednesday.   
 
 #### Population Genomics Day 3:
@@ -577,30 +609,40 @@ tail BRB_01.sam
 
 ------
 <div id='id-section29'/>   
+
+
 ### Entry 29: 2020-02-20, Thursday.   
 
 
 
 ------
 <div id='id-section30'/>   
+
+
 ### Entry 30: 2020-02-21, Friday.   
 
 
 
 ------
 <div id='id-section31'/>   
+
+
 ### Entry 31: 2020-02-24, Monday.   
 
 
 
 ------
-<div id='id-section32'/>   
+<div id='id-section32'/>  
+
+
 ### Entry 32: 2020-02-25, Tuesday.   
 
 
 
 ------
-<div id='id-section33'/>   
+<div id='id-section33'/>  
+
+
 ### Entry 33: 2020-02-26, Wednesday.   
 #### Learning Objectives
 1. Review Red Spruce ecology and biogeography and the transcriptomics experimental design
@@ -706,31 +748,41 @@ git push
 
 
 ------
-<div id='id-section34'/>   
+<div id='id-section34'/>  
+
+
 ### Entry 34: 2020-02-27, Thursday.   
 
 
 
 ------
 <div id='id-section35'/>   
+
+
 ### Entry 35: 2020-02-28, Friday.   
 
 
 
 ------
 <div id='id-section36'/>   
+
+
 ### Entry 36: 2020-03-02, Monday.   
 
 
 
 ------
 <div id='id-section37'/>   
+
+
 ### Entry 37: 2020-03-03, Tuesday.   
 
 
 
 ------
 <div id='id-section38'/>   
+
+
 ### Entry 38: 2020-03-04, Wednesday.   
 
 #### Class Objectives
@@ -819,126 +871,168 @@ head -n 100 quant.sf
 
 ------
 <div id='id-section39'/>   
+
+
 ### Entry 39: 2020-03-05, Thursday.   
 
 
 
 ------
 <div id='id-section40'/>   
+
+
 ### Entry 40: 2020-03-06, Friday.   
 
 
 
 ------
-<div id='id-section41'/>   
+<div id='id-section41'/>  
+
+
 ### Entry 41: 2020-03-09, Monday.   
 
 
 
 ------
 <div id='id-section42'/>   
+
+
 ### Entry 42: 2020-03-10, Tuesday.   
 
 
 
 ------
 <div id='id-section43'/>   
+
+
 ### Entry 43: 2020-03-11, Wednesday.   
 
 
 
 ------
 <div id='id-section44'/>   
+
+
 ### Entry 44: 2020-03-12, Thursday.   
 
 
 
 ------
 <div id='id-section45'/>   
+
+
 ### Entry 45: 2020-03-13, Friday.   
 
 
 
 ------
 <div id='id-section46'/>   
+
+
 ### Entry 46: 2020-03-16, Monday.   
 
 
 
 ------
 <div id='id-section47'/>   
+
+
 ### Entry 47: 2020-03-17, Tuesday.   
 
 
 
 ------
 <div id='id-section48'/>   
+
+
 ### Entry 48: 2020-03-18, Wednesday.   
 
 
 
 ------
 <div id='id-section49'/>   
+
+
 ### Entry 49: 2020-03-19, Thursday.   
 
 
 
 ------
 <div id='id-section50'/>   
+
+
 ### Entry 50: 2020-03-20, Friday.   
 
 
 
 ------
 <div id='id-section51'/>   
+
+
 ### Entry 51: 2020-03-23, Monday.   
 
 
 
 ------
 <div id='id-section52'/>   
+
+
 ### Entry 52: 2020-03-24, Tuesday.   
 
 
 
 ------
 <div id='id-section53'/>   
+
+
 ### Entry 53: 2020-03-25, Wednesday.   
 
 
 
 ------
 <div id='id-section54'/>   
+
+
 ### Entry 54: 2020-03-26, Thursday.   
 
 
 
 ------
 <div id='id-section55'/>   
+
+
 ### Entry 55: 2020-03-27, Friday.   
 
 
 
 ------
 <div id='id-section56'/>   
+
+
 ### Entry 56: 2020-03-30, Monday.   
 
 
 
 ------
 <div id='id-section57'/>   
+
+
 ### Entry 57: 2020-03-31, Tuesday.   
 
 
 
 ------
 <div id='id-section58'/>   
+
+
 ### Entry 58: 2020-04-01, Wednesday.   
 
 
 
 ------
-<div id='id-section59'/>   
+<div id='id-section59'/>  
+
+
 ### Entry 59: 2020-04-02, Thursday.   
 
 
