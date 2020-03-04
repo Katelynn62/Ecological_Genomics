@@ -683,11 +683,11 @@ git commit -m "comment your changes"
 git push
 
 ```
-3. 
+3. Can use git head code to back up commits...ran into problems with ANGSD and this helped.
 ```
 
 ```
-4.
+4. Ran fastqc for the cleaned reads -> wrote a new script for this as well. 
 ```
 
 ```
