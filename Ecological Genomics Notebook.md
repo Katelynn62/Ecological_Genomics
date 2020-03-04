@@ -53,7 +53,7 @@
 * [Entry 35: 2020-02-28, Friday](#id-section35)
 * [Entry 36: 2020-03-02, Monday](#id-section36)
 * [Entry 37: 2020-03-03, Tuesday](#id-section37)
-* [Entry 38: 2020-03-04, Wednesday](#id-section38)
+* [Entry 38: 2020-03-04, Wednesday: Transcriptomics Day 2](#id-section38)
 * [Entry 39: 2020-03-05, Thursday](#id-section39)
 * [Entry 40: 2020-03-06, Friday](#id-section40)
 * [Entry 41: 2020-03-09, Monday](#id-section41)
@@ -728,6 +728,69 @@ git push
 ------
 <div id='id-section38'/>   
 ### Entry 38: 2020-03-04, Wednesday.   
+#### Class Objectives
+1. Should have installed packages in R
+2. Map clean reads and quantify abundance simultaneously using Salmon package
+3. Assess mapping rate (Salmon log files); explore mapping to different reference transcript sets
+4. Generate compiled counts matrix (all 76 samples) from individual quant.sf files using tximport
+5. Move the data matrix to your machine
+6. Import data matric and sample information into R abd DESeq2
+7. Normalize, visualize and analyze exoressuib data using DESeq2
+
+#### Notes for Today
+
+#### Code for Today
+1. Write a loop for running Salmon with your populations
+```
+#!/bin/bash
+#index = /data/project_data/RS_RNASeq/ReferenceTranscriptome/Pabies_HC27_index
+cd /data/project_data/RS_RNASeq/fastq/cleanreads
+
+for file in JAY_02_C*.cl.fq
+
+do
+
+  salmon quant -i /data/project_data/RS_RNASeq/ReferenceTranscriptome/Pabies_HC27_index -l A -r ${file} --validateMappings -o /data/project_data/RS_RNASeq/salmon/cleanedreads/${file}
+
+
+done
+
+for file in JAY_02_D*.cl.fq
+
+do
+
+  salmon quant -i /data/project_data/RS_RNASeq/ReferenceTranscriptome/Pabies_HC27_index -l A -r ${file}  --validateMappings -o /data/project_data/RS_RNASeq/salmon/cleanedreads/${file}
+
+done
+
+```
+2.
+```
+```
+3.
+```
+```
+4.
+```
+```
+5.
+```
+```
+6.
+```
+```
+7.
+```
+```
+8.
+```
+```
+9.
+```
+```
+10.
+```
+```
 
 
 
