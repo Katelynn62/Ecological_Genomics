@@ -728,6 +728,7 @@ git push
 ------
 <div id='id-section38'/>   
 ### Entry 38: 2020-03-04, Wednesday.   
+
 #### Class Objectives
 1. Should have installed packages in R
 2. Map clean reads and quantify abundance simultaneously using Salmon package
@@ -764,19 +765,37 @@ do
 done
 
 ```
-2.
+2. Exploring the mapping rate of all of our samples mapped
+```
+grep -r --include \*.log -e 'Mapping rate'
+```
+* Here we mapped to high quality transcripts to see if we would have higher quality mapping rates as well...we did not see this. 
+* Rates that Melissa had before ~27% : percent of reads in a given file that mapped on the genome with high quality, high confidence index file (reference) that we used. 
+* Used our cleaned reads, we got a much much lower mapping rate
+* Can it be that we mapped the wrong reference?
+* confidence assessments are assigned by blasts through the norway spruce and other plant species...you get a percent identitiy. 
+* High confidence genese are blasted with 70%  or higher homology
+* Median - 30-70%
+* low = >0%
+* There are not a lot of conifer specific genes on genbank..so that could be something for us to keep in mind. 
+3. Rewriting the loop
 ```
 ```
-3.
-```
-```
+* When making the Salmon Index...
 4.
 ```
+salmon index <file you want it to index or reference>
 ```
-5.
+* cds is all, rather than the high quality
+* we altered the K flag...instead of 31, we changed it to 27 which made our mapping worse. 
+* With this data being 3' tag seq are we getting far enough past UTR
+5. Look into quant.sf files : Must be in the /salmon/allmapping/<Your Pop File>
 ```
+head -n 100 quant.sf
 ```
-6.
+![Quant.sf](https://github.com/Katelynn62/Ecological_Genomics/blob/master/quant.sf_snapshot.PNG) 
+* MA - individual transcripts
+6
 ```
 ```
 7.
