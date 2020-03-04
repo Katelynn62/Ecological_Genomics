@@ -104,18 +104,22 @@
 
 ------
 <div id='id-section1'/>   
+
+
 ### Entry 1: 2020-01-13, Monday.   
 
 
 
 ------
 <div id='id-section2'/>   
+
 ### Entry 2: 2020-01-14, Tuesday.   
 
 
 
 ------
-<div id='id-section3'/>   
+<div id='id-section3'/> 
+
 ### Entry 3: 2020-01-15, Wednesday.   
 
 
