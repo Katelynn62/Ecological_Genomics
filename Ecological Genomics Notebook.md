@@ -907,7 +907,7 @@ head -n 100 quant.sf
 
 ### Entry 43: 2020-03-11, Wednesday.   
 
-
+** Spring Break
 
 ------
 <div id='id-section44'/>   
@@ -931,7 +931,7 @@ head -n 100 quant.sf
 
 ### Entry 46: 2020-03-16, Monday.   
 
-
+** Class Canceled
 
 ------
 <div id='id-section47'/>   
@@ -940,12 +940,130 @@ head -n 100 quant.sf
 ### Entry 47: 2020-03-17, Tuesday.   
 
 
-
 ------
 <div id='id-section48'/>   
 
 
 ### Entry 48: 2020-03-18, Wednesday.   
+
+#### Learning Objectives
+1. Recap on Mapping 3' RNA-seq data to transcriptome and assembly of data matrix
+2. Import data matrix and sample information into R ansd DESeq2
+3. Normalize, visualize and analyze expression data using DESeq2
+
+#### Notes for Today
+
+* Troubleshooting and improving mapping rate
+1. When writing for loops for mapping reads to reference transcriptome, reads were extremely low. ~2%
+2. Many of our reads were not mapping becayse the reference we had selected included only the coding region
+3. When working with 3' RNAseq data, much of the data is likely to be in the untranslated region, so this region + coding region was combined to create a reference transcriptome with mapping rate of 52%
+
+* Assembling a counts matrix using 'tximport' in R
+```
+library(tximportData)
+library(tximport)
+
+#locate the directory containing the files. 
+dir <- "/data/project_data/RS_RNASeq/salmon/"
+list.files(dir)
+
+# read in table with sample ids
+samples <- read.table("/data/project_data/RS_RNASeq/salmon/RS_samples.txt", header=TRUE)
+
+# now point to quant files
+all_files <- file.path(dir, samples$sample, "quant.sf")
+names(all_files) <- samples$sample
+
+# what would be used if linked transcripts to genes
+#txi <- tximport(files, type = "salmon", tx2gene = tx2gene)
+# to be able to run without tx2gene
+txi <- tximport(all_files, type = "salmon", txOut=TRUE)  
+names(txi)
+
+head(txi$counts)
+
+countsMatrix <- txi$counts
+dim(countsMatrix)
+#[1] 66069    76
+
+# To write out
+write.table(countsMatrix, file = "RS_countsMatrix.txt", col.names = T, row.names = T, quote = F)
+```
+
+* Import counts matrix into R and run DESeq
+
+```
+## Set your working directory
+setwd("YOURWORKINGDIRECTORY")
+
+## Import the libraries that we're likely to need in this session
+library(DESeq2)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(scales)
+library(ggpubr)
+library(wesanderson)
+library(vsn)  ### First: BiocManager::install("vsn") AND BiocManager::install("hexbin")
+
+## Import the counts matrix
+countsTable <- read.table("RS_cds2kb_countsMatrix.txt", header=TRUE, row.names=1)
+head(countsTable)
+dim(countsTable)
+countsTableRound <- round(countsTable) # Need to round because DESeq wants only integers
+head(countsTableRound)
+
+## Import the samples description table - links each sample to factors of the experimental design.
+# Need the colClasses otherwise imports "day" as numeric which DESeq doesn't like, coula altneratively change to d0, d5, d10
+conds <- read.delim("RS_samples.txt", header=TRUE, stringsAsFactors = TRUE, row.names=1, colClasses=c('factor', 'factor', 'factor', 'factor'))
+head(conds)
+dim(conds)
+
+
+## Let's see how many reads we have from each sample:
+colSums(countsTableRound)
+mean(colSums(countsTableRound))
+barplot(colSums(countsTableRound), las=3, cex.names=0.5,names.arg = substring(colnames(countsTableRound),1,13))
+abline(h=mean(colSums(countsTableRound)), col="blue", lwd =2)
+
+#What is the average number of counts per gene
+rowSums(countsTableRound)
+mean(rowSums(countsTableRound)) #mean is being driven up by very very large genes
+median(rowSums(countsTableRound)) # gene expression is NOT a normal distribution.
+### Shows dispersion across genes; differences in magnitude of expression
+
+#What is the average number of counts per gene per sample
+apply(countsTableRound, 2, mean)
+
+## Create a DESeq object and define the experimental design here with the tilde
+
+ddsPop = DESeqDataSetFromMatrix(countData = countsTableRound, colData = conds, design = ~ pop + day + treatment)
+dim(dds)
+
+# Filter out genes with few reads
+
+ddsPop = ddsPop[rowSums(counts(ddsPop)) > 76]
+dim(dds)
+
+## Run the DESeq model to test for differential gene expression: 1) estimate size factors (per sample), 2) estimate dispersion (per gene), 3) run negative binomial glm
+ddsPop = DESeq(ddsPop)
+
+
+# List the results you've generated
+resultsNames(ddsPop)
+# [1] "Intercept"            "pop_BRU_05_vs_ASC_06"
+# [3] "pop_CAM_02_vs_ASC_06" "pop_ESC_01_vs_ASC_06"
+# [5] "pop_JAY_02_vs_ASC_06" "pop_KAN_04_vs_ASC_06"
+# [7] "pop_LOL_02_vs_ASC_06" "pop_MMF_13_vs_ASC_06"
+# [9] "pop_NOR_02_vs_ASC_06" "pop_XBM_07_vs_ASC_06"
+# [11] "day_10_vs_0"          "day_5_vs_0"          
+# [13] "treatment_D_vs_C"     "treatment_H_vs_C" 
+```
+* Ways to explore data analysis
+1. explore the various results for a given experimental design: ``` resultsNames(dds) ```
+2. Det up your DESeq object with different experimental designs. ``` design= ~ climate + treatment + climate:treatment ```
+3. Subset your data to exclude/include different factors, run different designs; ``` select``` and ``` subset ``` are handing functions in R for subsetting your ```countsMatrix``` or ```conds``` table. *we will use this for creating Day 10 samples.*
+
 
 
 
